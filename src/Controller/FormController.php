@@ -92,39 +92,16 @@ class FormController extends AbstractController
             }
         }
 
-        //Liste des compétences disponibles
-        $competences = [];
-        $competences = $competenceRepository->findAll();
-
-        //Liste des expériences professionnelles disponibles
-        $experiences = [];
-        $experiences = $experienceRepository->findAll();
-
-        //Liste des loisirs disponibles
-        $leisures = [];
-        $leisures = $leisureRepository->findAll();
-
-        //Liste desformations disponibles
-        $formations = [];
-        $formations = $formationRepository->findAll();
-
         return $this->render('form/index.html.twig', [
             'competence_form' => $competenceForm->createView(),
-            //'competence'=> $competence,
-
             'experience_form' => $experienceForm->createView(),
-            //'experience'=> $experience,
-
             'formation_form' => $formationForm->createView(),
-            //'formation'=> $formation,
-
             'leisure_form' => $leisureForm->createView(),
-            //'leisure'=> $leisure,
 
-            'competences' => $competences,
-            'experiences' => $experiences,
-            'leisures' => $leisures,
-            'formations' => $formations,
+            'competences' => $competenceRepository->findAll(),
+            'experiences' => $experienceRepository->findAll(),
+            'leisures' => $leisureRepository->findAll(),
+            'formations' => $formationRepository->findAll(),
         ]);
     }
 }
