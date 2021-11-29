@@ -1,0 +1,48 @@
+<div class="card border-success min-height mt-1">
+        <div class="card-body">
+            <h5 class="card-title text-success">Ajouter une formation</h5>
+            {{ form_start(formation_form) }}
+                {{form_widget(formation_form.name, {'attr': {'placeholder': 'Titre de la formation', 'class':'form-control border-success'}})}}
+
+                <div class="row mt-3">
+                    <div class="col-6">
+                        {{form_widget(formation_form.school, {'attr': {'placeholder': 'Ecole', 'class':'form-control border-success'}})}}
+                    </div>
+                    <div class="col-6">
+                        {{form_widget(formation_form.diploma, {'attr': {'placeholder': 'Diplôme obtenu', 'class':'form-control border-success'}})}}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        {{form_widget(formation_form.localisation, {'attr': {'placeholder': 'Lieu', 'class':'form-control border-success'}})}}
+                    </div>
+                    <div class="col-4">
+                        {{form_widget(formation_form.startDate, {'attr': {'class':'form-control border-success'}})}}
+                    </div>
+                    <div class="col-4">
+                        {{form_widget(formation_form.endDate, {'attr': {'class':'form-control border-success'}})}}
+                    </div>
+                </div>
+                {{form_widget(formation_form.competences, {'attr': {'class':'form-select border-success mt-3', 'size':'2'}})}}
+
+                {{form_widget(formation_form.description, {'attr': {'placeholder': 'Description du poste', 'class':'form-control border-success mt-3'}})}}
+
+                {{form_widget(formation_form.enregistrer, {'attr': {'class':'btn btn-success btn-sm mt-3'}})}}
+
+            {{ form_end(formation_form) }}
+        
+            <h5 class="card-title text-success mt-3">Liste des expériences professionnelles</h5>
+            <ul>
+                {% for formation in formations %}
+                    <li>
+                        {{formation.name}}
+                        {# <a href="{{ path('delete_experience', {id:formation.id}) }}"> #}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        {# </a> #}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
