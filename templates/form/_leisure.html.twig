@@ -1,16 +1,16 @@
-<div class="card border-primary min-height">
+<div class="card border-teal min-height">
     <div class="card-body">
         <div class="row">
             <div class="col-6">
-                <h5 class="card-title text-primary">Ajouter un loisir</h5>
+                <h5 class="card-title text-teal">Ajouter un loisir</h5>
                 {{ form_start(leisure_form) }}
-                    {{form_widget(leisure_form.name, {'attr': {'placeholder': 'Nom du loisir', 'class':'form-control border-primary'}})}}
-                    {{form_widget(leisure_form.description, {'attr': {'placeholder': 'Description', 'class':'form-control border-primary mt-3'}})}}
-                    {{form_widget(leisure_form.enregistrer, {'attr': {'class':'btn btn-primary btn-sm mt-3'}})}}
+                    {{form_widget(leisure_form.name, {'attr': {'placeholder': 'Nom du loisir', 'class':'form-control border-teal'}})}}
+                    {{form_widget(leisure_form.description, {'attr': {'placeholder': 'Description', 'class':'form-control border-teal mt-3'}})}}
+                    {{form_widget(leisure_form.enregistrer, {'attr': {'class':'btn btn-teal btn-sm mt-3'}})}}
                 {{ form_end(leisure_form) }}
             </div>
             <div class="col-6">
-                <h5 class="card-title text-primary">Liste des loisirs</h5>
+                <h5 class="card-title text-teal">Liste des loisirs</h5>
                 <ul>
                     {% for leisure in leisures %}
                         <li>

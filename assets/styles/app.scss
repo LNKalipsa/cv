@@ -1,6 +1,7 @@
-// @import "_variables.scss";
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
-// @import "_bootswatch.scss";
+@import "../../node_modules/bootstrap/scss/_functions.scss";
+@import "../../node_modules/bootstrap/scss/_variables.scss";
+
+
 $theme-colors: (
   "primary":    $primary,
   "secondary":  $secondary,
@@ -10,9 +11,33 @@ $theme-colors: (
   "danger":     $danger,
   "light":      $light,
   "dark":       $dark,
-  "rose":       $pink-500,
-);
-
+  
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "orange":     $orange,
+  "teal":       $teal
+  );
+  
+  @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+  //@import "_bootswatch.scss";
+  
 .min-height {
   min-height: 100%;
+}
+
+.text-indigo {
+  color: $indigo
+}
+.text-purple {
+  color: $purple
+}
+.text-pink {
+  color: $pink
+}
+.text-orange {
+  color: $orange
+}
+.text-teal {
+  color: $teal
 }
