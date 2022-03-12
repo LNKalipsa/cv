@@ -1,20 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LandingPageController!{% endblock %}
+{% block title %}Hélène Blandin{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<header>
+    <nav id="nav" class="navbar navbar-light navbar-expand-lg bg-light fixed-top">
+        <div class="container-fluid">
+            <a href="#top" class="navbar-brand">Accueil</a>
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" href="#competence">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#formation">Formation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#experience">Expérience professionnelle</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#loisir">Loisirs et intérêts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#realisation">Réalisations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-light" style="background-color: #e3f2fd;" href="{{path('form')}}">Ajouter</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 id="landingPageTitle" class="mt-4">Hélène Blandin</h1>
+    </div>
+</header>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/cv_ligne/src/Controller/LandingPageController.php'|file_link(0) }}">src/Controller/LandingPageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/cv_ligne/templates/landing_page/index.html.twig'|file_link(0) }}">templates/landing_page/index.html.twig</a></code></li>
-    </ul>
+<div id="landingContainer" class="container" data-bs-spy="scroll" data-bs-target="#nav" data-bs-offset="10" tabindex="0">
+    <div class="card mt-2 p-1 border-info">
+        <h4 id="competences" class="text-info">Compétences</h4>
+        <div class="row">
+            {% for competence in competences %}
+                <li class="col-3">{{ competence.name }}</li>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card mt-2 p-1 border-orange">
+        <h4 id="formation" class="text-orange">Formation</h4>
+        <div class="row">
+            {% for formation in formations %}
+                <li class="col-3">{{ formation.name }}</li>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card mt-2 p-1 border-warning">
+        <h4 id="experience" class="text-warning">Expérience professionnelle</h4>
+        <div class="row">
+            {% for experience in experiences %}
+                <li class="col-3">{{ experience.name }}</li>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="card mt-2 p-1 border-teal">
+        <h4 id="loisir" class="text-teal">Loisirs et Intérêts</h4>
+        <div class="row">
+            {% for loisir in loisirs %}
+                <li class="col-3">{{ loisir.name }}</li>
+            {% endfor %}
+        </div>
+    </div>
+    
+    {# <div class="card mt-2 p-1 border-indigo">
+        <h4 id="realisation" class="text-indigo">Réalisations</h4>
+        <div class="row">
+        </div>
+    </div> #}
 </div>
+
 {% endblock %}
