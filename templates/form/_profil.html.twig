@@ -1,0 +1,53 @@
+<div class="card border-indigo min-height mt-1">
+        <div class="card-body">
+            <h5 class="card-title text-indigo">Ajouter son profil</h5>
+            {{ form_start(profil_form) }}
+                <div class="row">
+                    <div class="col-6">
+                        {{form_widget(profil_form.firstname, {'attr': {'placeholder': 'Prénom', 'class':'form-control border-indigo'}})}}
+                    </div>
+                    <div class="col-6">
+                        {{form_widget(profil_form.name, {'attr': {'placeholder': 'Nom', 'class':'form-control border-indigo'}})}}
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3">Date de naissance :</div>
+                    <div class="col-3">
+                        {{form_widget(profil_form.birthdate, {'attr': {'class':'form-control border-indigo'}})}}
+                    </div>
+                    <div class="col-2">Avez vous le permis ?</div>
+                    <div class="col-4">
+                        {# affiche indépendamment chaque radio#}
+                        {% for child in profil_form.drivingLicence%}
+                            <div class="form-check form-check-inline">
+                                {{form_widget(child)}}
+                                {{form_label(child, null)}}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {{form_widget(profil_form.address, {'attr': {'placeholder': 'Adresse','class':'form-control border-indigo mt-3'}})}}
+                <div class="row">
+                    <div class="col-4">
+                        {{form_widget(profil_form.postcode, {'attr': {'placeholder': 'Code postale','class':'form-control border-indigo mt-3'}})}}
+                    </div>
+                    <div class="col-8">
+                        {{form_widget(profil_form.city, {'attr': {'placeholder': 'Ville','class':'form-control border-indigo mt-3'}})}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                    {{form_widget(profil_form.phoneNumber, {'attr': {'placeholder': 'Numéro de téléphone','class':'form-control border-indigo mt-3'}})}}
+                    </div>
+                    <div class="col-6">
+                    {{form_widget(profil_form.mail, {'attr': {'placeholder': 'E-mail','class':'form-control border-indigo mt-3'}})}}
+                    </div>
+                </div>
+
+                {{form_widget(profil_form.description, {'attr': {'placeholder': 'Décrivez-vous', 'class':'form-control border-indigo mt-3'}})}}
+
+                {{form_widget(profil_form.enregistrer, {'attr': {'class':'btn btn-indigo btn-sm mt-3'}})}}
+
+            {{ form_end(profil_form) }}
+        </div>
+    </div>

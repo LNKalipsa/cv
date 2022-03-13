@@ -13,8 +13,9 @@
             <a class="btn btn-dark" href="{{path('landing_page')}}">Accueil</a>
         </div>
     </div>
+        {{include('form/_profil.html.twig')}}
 
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-lg-6 col-md-12">
             {{ include('form/_competence.html.twig') }}
         </div>
@@ -22,7 +23,7 @@
             {{ include('form/_leisure.html.twig') }}
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-2 mb-2">
         <div class="col-lg-6 col-md-12">
             {{ include('form/_experience.html.twig') }}
         </div>
