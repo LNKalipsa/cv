@@ -6,14 +6,17 @@ use App\Entity\Competence;
 use App\Entity\Experience;
 use App\Entity\Formation;
 use App\Entity\Leisure;
+use App\Entity\Profil;
 use App\Form\CompetenceType;
 use App\Form\ExperienceType;
 use App\Form\FormationType;
 use App\Form\LeisureType;
+use App\Form\ProfilType;
 use App\Repository\CompetenceRepository;
 use App\Repository\ExperienceRepository;
 use App\Repository\FormationRepository;
 use App\Repository\LeisureRepository;
+use App\Repository\ProfilRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +27,7 @@ class FormController extends AbstractController
     /**
      * @Route("/form", name="form")
      */
-    public function index(CompetenceRepository $competenceRepository, ExperienceRepository $experienceRepository, LeisureRepository $leisureRepository, FormationRepository $formationRepository, Request $request): Response
+    public function index(CompetenceRepository $competenceRepository, ExperienceRepository $experienceRepository, LeisureRepository $leisureRepository, FormationRepository $formationRepository, ProfilRepository $profilRepository, Request $request): Response
     {
         $competence = new Competence();
         $experience = new Experience();
@@ -32,11 +35,18 @@ class FormController extends AbstractController
         $leisure = new Leisure();
 
         $em = $this->getDoctrine()->getManager();
+        
+        //affichage des données perso si elles sont déjà existantes et n'autoriser que l'édition et pas de nouvelles entrées
+        $profils = $em->getRepository(Profil::class)->findAll();
+        $profil = count($profils) > 0  ? $profils[0] : new Profil();
 
         $competenceForm = $this->createForm(CompetenceType::class, $competence);
         $experienceForm = $this->createForm(ExperienceType::class, $experience);
         $formationForm = $this->createForm(FormationType::class, $formation);
         $leisureForm = $this->createForm(LeisureType::class, $leisure);
+        $profilForm = $this->createForm(ProfilType::class, $profil);
+
+
 
         if($request->isMethod('POST')) {
             if($competenceForm->handleRequest($request)->isSubmitted() && $competenceForm->isValid()) {
@@ -49,10 +59,6 @@ class FormController extends AbstractController
 
             if($experienceForm->handleRequest($request)->isSubmitted() && $experienceForm->isValid()) {
                 $experience = $experienceForm->getData();
-
-                //$experience = $request->request->get("experience");
-                //$competences = $experience["competences"];   
-                
                 $competences = $experience->getCompetences();
                 
                 foreach($competences as $competence) {
@@ -90,6 +96,15 @@ class FormController extends AbstractController
             }else{
                 $this->addFlash('error', "Erreur sur l'ajout du loisir");
             }
+            
+            if($profilForm->handleRequest($request)->isSubmitted() && $profilForm->isValid()) {
+                $profil = $profilForm->getData();
+                $em->persist($profil);
+                $em->flush();
+            }else {
+                $this->addFlash('error', "Erreur sur l'ajout du profil");
+            }
+
         }
 
         return $this->render('form/index.html.twig', [
@@ -97,11 +112,13 @@ class FormController extends AbstractController
             'experience_form' => $experienceForm->createView(),
             'formation_form' => $formationForm->createView(),
             'leisure_form' => $leisureForm->createView(),
+            'profil_form' => $profilForm->createView(),
 
             'competences' => $competenceRepository->findAll(),
             'experiences' => $experienceRepository->findAll(),
             'leisures' => $leisureRepository->findAll(),
             'formations' => $formationRepository->findAll(),
+            'profils' => $profilRepository->findAll(),
         ]);
     }
 }
