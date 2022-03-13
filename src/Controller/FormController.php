@@ -17,9 +17,11 @@ use App\Repository\ExperienceRepository;
 use App\Repository\FormationRepository;
 use App\Repository\LeisureRepository;
 use App\Repository\ProfilRepository;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FormController extends AbstractController
@@ -50,59 +52,83 @@ class FormController extends AbstractController
 
         if($request->isMethod('POST')) {
             if($competenceForm->handleRequest($request)->isSubmitted() && $competenceForm->isValid()) {
-                $competence = $competenceForm->getData();
-                $em->persist($competence);
-                $em->flush();
-            }else{
-                $this->addFlash('error', "Erreur sur l'ajout de la compétence");
+                try {
+                    $competence = $competenceForm->getData();
+                    $em->persist($competence);
+                    $em->flush();
+
+                    $this->addFlash('success', 'La compétence a été ajoutée avec succès !');
+
+                }catch (Exception $exception){
+                    $this->addFlash('error', "Erreur sur l'ajout de la compétence");
+                }
             }
 
             if($experienceForm->handleRequest($request)->isSubmitted() && $experienceForm->isValid()) {
-                $experience = $experienceForm->getData();
-                $competences = $experience->getCompetences();
-                
-                foreach($competences as $competence) {
-                    $competence->addExperience($experience);
-                    $em->persist($competence);
+                try{
+                    $experience = $experienceForm->getData();
+                    $competences = $experience->getCompetences();
+
+                    foreach($competences as $competence) {
+                        $competence->addExperience($experience);
+                        $em->persist($competence);
+                    }
+                    $em->persist($experience);
+                    $em->flush();
+
+                    $this->addFlash('success', "L'expérience professionnelle a été ajoutée avec succès !");
+
+
+                } catch (Exception $exception) {
+                    $this->addFlash('error', "Erreur sur l'ajout de l'expérience'");
                 }
 
-                $em->persist($experience);
-                $em->flush();
-
-            }else{
-                $this->addFlash('error', "Erreur sur l'ajout de l'expérience'");
             }
 
             if($formationForm->handleRequest($request)->isSubmitted() && $formationForm->isValid()) {
-                $formation = $formationForm->getData();
+                try {
+                    $formation = $formationForm->getData();
+                    $competences = $formation->getCompetences();
+                    
+                    foreach($competences as $competence) {
+                        $competence->addFormation($formation);
+                        $em->persist($competence);
+                    }
+    
+                    $em->persist($formation);
+                    $em->flush();
 
-                $competences = $formation->getCompetences();
-                
-                foreach($competences as $competence) {
-                    $competence->addFormation($formation);
-                    $em->persist($competence);
+                    $this->addFlash('success', "La formation a été ajoutée avec succès !");
+
+                } catch (Exception $exception) {
+                    $this->addFlash('error', "Erreur sur l'ajout de la formation");
                 }
-
-                $em->persist($formation);
-                $em->flush();
-            }else{
-                $this->addFlash('error', "Erreur sur l'ajout de la formation");
             }
 
             if($leisureForm->handleRequest($request)->isSubmitted() && $leisureForm->isValid()) {
-                $leisure = $leisureForm->getData();
-                $em->persist($leisure);
-                $em->flush();
-            }else{
-                $this->addFlash('error', "Erreur sur l'ajout du loisir");
+                try {
+                    $leisure = $leisureForm->getData();
+                    $em->persist($leisure);
+                    $em->flush();
+
+                    $this->addFlash('success', "Le loisir a été ajouté avec succès !");
+
+                } catch (Exception $exception) {
+                    $this->addFlash('error', "Erreur sur l'ajout du loisir");
+                }
             }
             
             if($profilForm->handleRequest($request)->isSubmitted() && $profilForm->isValid()) {
-                $profil = $profilForm->getData();
-                $em->persist($profil);
-                $em->flush();
-            }else {
-                $this->addFlash('error', "Erreur sur l'ajout du profil");
+                try {
+                    $profil = $profilForm->getData();
+                    $em->persist($profil);
+                    $em->flush();
+
+                    $this->addFlash('success', "Votre profil a bien été mit à jour");
+
+                } catch (Exception $exception) {
+                    $this->addFlash('error', "Erreur sur l'ajout du profil");
+                }                
             }
 
         }

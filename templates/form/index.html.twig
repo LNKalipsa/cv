@@ -3,6 +3,12 @@
 {% block title %}Ajouter au CV{% endblock %}
 
 {% block body %}
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success mt-2">{{ flashMessage }}</div>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('error') %}
+    <div class="alert alert-danger mt-2">{{ flashMessage }}</div>
+{% endfor %}
 <div class="container">
 
     <div class="row">

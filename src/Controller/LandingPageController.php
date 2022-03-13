@@ -6,6 +6,7 @@ use App\Entity\Competence;
 use App\Entity\Experience;
 use App\Entity\Formation;
 use App\Entity\Leisure;
+use App\Entity\Profil;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,12 +29,16 @@ class LandingPageController extends AbstractController
         $formations = $this->em->getRepository(Formation::class)->findAll();
         $experiences = $this->em->getRepository(Experience::class)->findAll();
         $loisirs = $this->em->getRepository(Leisure::class)->findAll();
+        $profils = $this->em->getRepository(Profil::class)->findAll();
+
+        $profil = $profils[0];
 
         return $this->render('landing_page/index.html.twig', [
             'competences' => $competences,
             'formations' => $formations,
             'experiences' => $experiences,
             'loisirs' => $loisirs,
+            'profil' => $profil
         ]);
     }
 }
