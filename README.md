@@ -12,9 +12,9 @@ Pour installer le projet :
  - npm install
 
 Configurer la Base de données :
- 1- faire une copie du fichier .env et le renommer .env.dev.local
- 2- dans ce fichier décommenter ligne 30 et configurer vos accès à votre base de donnée
- 3- lancer la commande php bin/console doctrine:migration:migrate
+  1- faire une copie du fichier .env et le renommer .env.dev.local
+  2- dans ce fichier décommenter ligne 30 et configurer vos accès à votre base de donnée
+  3- lancer la commande php bin/console doctrine:migration:migrate
 
 Pour visualiser le projet : 
   - Serveur local Apache / PHP (mettre le projet dans le dossier "wwww" de votre serveur local)
