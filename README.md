@@ -18,4 +18,4 @@ Configurer la Base de données :
 
 Pour visualiser le projet : 
   - Serveur local Apache / PHP (mettre le projet dans le dossier "wwww" de votre serveur local)
-  - lancer la commande yarn encore dev-serveur (pour lancer le webpack)
+  - lancer la commande yarn encore dev (pour lancer le webpack)

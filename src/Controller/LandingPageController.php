@@ -31,7 +31,19 @@ class LandingPageController extends AbstractController
         $loisirs = $this->em->getRepository(Leisure::class)->findAll();
         $profils = $this->em->getRepository(Profil::class)->findAll();
 
-        $profil = count($profils) > 0  ? $profils[0] : new Profil();
+        if(count($profils) > 0){
+            $profil = $profils[0];
+        }else{
+            $profil = new Profil();
+            $profil ->setFirstname('Prénom')
+                    ->setName('Nom')
+                    ->setAddress('Adresse')
+                    ->setPostcode('01234')
+                    ->setCity('Ville')
+                    ->setMail('e-mail')
+                    ->setPhoneNumber('0123456789')
+                    ->setDescription('Votre description ici');
+        }
 
         return $this->render('landing_page/index.html.twig', [
             'competences' => $competences,
