@@ -28,4 +28,9 @@ final class Version20220312134752 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE profil');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

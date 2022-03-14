@@ -34,4 +34,9 @@ final class Version20211116140244 extends AbstractMigration
         $this->addSql('DROP TABLE competence_experience');
         $this->addSql('DROP TABLE competence_formation');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

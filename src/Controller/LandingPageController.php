@@ -31,7 +31,7 @@ class LandingPageController extends AbstractController
         $loisirs = $this->em->getRepository(Leisure::class)->findAll();
         $profils = $this->em->getRepository(Profil::class)->findAll();
 
-        $profil = $profils[0];
+        $profil = count($profils) > 0  ? $profils[0] : new Profil();
 
         return $this->render('landing_page/index.html.twig', [
             'competences' => $competences,
