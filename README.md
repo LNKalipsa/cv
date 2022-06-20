@@ -6,6 +6,10 @@ Le projet nécessite quelques améliorations, celles-ci viendront dans une V2 :
   - Ajout d'une connexion sécurisée via le security bundle
   - Possibilité d'ajouter une photo via Vichuploader
 
+Prérequis d'installation :
+  - Serveur Apache
+  - Composer
+
 Pour installer le projet :
    - composer install
    - yarn install
